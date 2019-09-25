@@ -42,6 +42,8 @@ typedef struct instruction_s
 } instruction_t;
 
 int monty(int argc, char **argv);
-char *file_to_array(const char *file);
-
+char **file_to_array(const char *file);
+void line_parser(char *line);
+int sizeof_string(char *);
+char **file_to_2d_array(char *string);
 #endif
