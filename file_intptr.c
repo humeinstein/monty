@@ -9,10 +9,10 @@ char *file_to_array(const char *file)
 {
 	char *file_out;
 	int file_desc, file_size;
+	struct stat st;
 
 	file_desc = open(file, O_RDONLY);
 
-	struct stat st;
 	stat(file, &st);
 	file_size = st.st_size;
 
@@ -22,6 +22,8 @@ char *file_to_array(const char *file)
 		return (NULL);
 	if (file_desc == -1)
 		return (NULL);
+
+	read(file_desc, file_out, file_size);
 
 	return (file_out);
 
