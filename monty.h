@@ -49,4 +49,9 @@ void *pint(stack_t **head, unsigned int line);
 void *swap(stack_t **head, unsgined int line);
 
 
+int monty(int argc, char **argv);
+char **file_to_array(const char *file);
+void line_parser(char *line);
+int sizeof_string(char *);
+char **file_to_2d_array(char *string);
 #endif
