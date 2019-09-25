@@ -1,6 +1,4 @@
 #include "monty.h"
-
-
 /**
  * file_to_array - converts a file to an array
  * @file: The file to read from
