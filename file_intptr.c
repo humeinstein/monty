@@ -1,11 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "test_header.h"
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <sys/stat.h>
+#include "monty.h"
+
 
 /**
  * file_to_array - converts a file to an array
