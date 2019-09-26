@@ -6,7 +6,7 @@
  */
 void free_2d_array(char **arr)
 {
-	int loop = 0;
+	int loop = -1;
 
 	loop = 0;
 	while (arr[loop] != NULL)

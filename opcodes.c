@@ -57,11 +57,12 @@ void pall(stack_t **head, unsigned int line)
 
 			while ((*head)->next != NULL)
 			{
-				printf("%d\n", (*head)->n);
+				if ((*head)->n > -1)
+					printf("%d\n", (*head)->n);
 				(*head) = (*head)->next;
 			}
-
-			printf("%d\n", (*head)->n);
+			if ((*head)->n > -1)
+				printf("%d\n", (*head)->n);
 		}
 	}
 }
