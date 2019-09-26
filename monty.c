@@ -9,8 +9,8 @@
  */
 int main(int argc, char *argv[])
 {
-	char **file_input, *line_parse;
-	int line_count, line_inc;
+	char **file_input;
+	int line_count;
 
 	if (argc > 1)
 	{

@@ -100,9 +100,8 @@ void line_parser(char *line)
 
 	command = NULL;
 
-	ptr_origin = token;
-
 	token = strtok(line, " ");
+	ptr_origin = token;
 	while (token != NULL)
 	{
 		if ((token[0] > 96 && token[0] < 123) && command == NULL)
@@ -115,7 +114,13 @@ void line_parser(char *line)
 		token = strtok(NULL, " ");
 	}
 
-	printf("%s\n", command);
-	printf("%d\n", parameter);
-
+	if (strcmp(command, "push") == 0)
+		push(&global_stack, (unsigned int)parameter, (unsigned int)1);
+	if (strcmp(command, "pint") == 0)
+		pint(&global_stack, (unsigned int)1);
+	if (strcmp(command, "pall") == 0)
+		pall(&global_stack, (unsigned int)1);
+/*	if (strcmp(command, "pop") == 0)
+		pall(&global_stack, (unsigned int)1);
+*/
 }

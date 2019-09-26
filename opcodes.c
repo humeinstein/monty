@@ -4,43 +4,59 @@
 *
 *
 */
-void *pop(stack_t **head, unsigned int line)
+void pop(stack_t **head, unsigned int line)
 {
-    stack_t *temp = (*head)->next;
-    free(*head);
-    (*head) = temp;
-    return(NULL);
 }
-void *push(stack_t **head, unsigned int value, unsigned int line)
-{
-    stack_t *new = (*head);
-    new->n = value;
-    new->next = (*head);
-    new->prev = NULL;
 
-    if ((*head) != NULL)
-        (*head)->prev = new;
-    (*head) = new;
-}
-void *pall(stack_t **head, unsigned int line)
+void push(stack_t **head, unsigned int value, unsigned int line)
 {
-    size_t inc;
-    inc = 0;
+    	stack_t *new;
+	new = malloc(sizeof(stack_t));
+    	new->n = (int)value;
 
-    while (*head)
-    {
-        inc++;
-        printf("%d\n", (*head)->n);
-        (*head) = (*head)->next;
-    }
-    return(NULL);
+	if (*head == NULL)
+		(*head) = new;
+	else
+	{
+		while ((*head)->prev != NULL)
+			(*head) = (*head)->prev;
+			new->next = (*head);
+			new->prev = NULL;
+			(*head)->prev = new;
+			new->n = (int)value;
+	}
 }
-void *pint(stack_t **head, unsigned int line)
+
+void pall(stack_t **head, unsigned int line)
 {
-    if ((*head) != NULL)
-    {
-        printf("%d", (*head)->n);
-    }
+	while ((*head)->prev != NULL)
+		(*head) = (*head)->prev;
+
+	while ((*head)->next != NULL)
+	{
+		printf("%d\n", (*head)->n);
+		(*head) = (*head)->next;
+	}
+		printf("%d\n", (*head)->n);
+
+	while ((*head)->prev != NULL)
+		(*head) = (*head)->prev;
+
+}
+void pint(stack_t **head, unsigned int line)
+{
+	stack_t *temp = *head;
+	if (*head != NULL)
+	{
+		while (temp->prev != NULL)
+			temp = temp->prev;
+
+		printf("%d\n", temp->n);
+	}
+	else
+	{
+		printf("No stack found\n");
+	}
 }
 void *swap(stack_t **head, unsigned int line)
 {
@@ -50,14 +66,15 @@ void *swap(stack_t **head, unsigned int line)
 }
 void *add(stack_t **head, unsigned int line)
 {
+	/*
     if ((*head) == NULL || (*head)->next == NULL)
     {
         return("ERROR FILL IN ERROR CODES");
-    }
+    }*/
     int first = (*head)->n;
     *head = (*head)->next;
     int sum = first + (*head)->n;
-    return (sum);
+    /*return (sum);*/
 
 }
 
