@@ -68,9 +68,10 @@ void pall(stack_t **head, unsigned int line)
 }
 void pint(stack_t **head, unsigned int line)
 {
+	stack_t *temp;
+	temp = *head;
 	(void)line;
 
-	stack_t *temp = *head;
 	if (*head != NULL)
 	{
 		while (temp->prev != NULL)
