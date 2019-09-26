@@ -44,11 +44,9 @@ void *pint(stack_t **head, unsigned int line)
 }
 void *swap(stack_t **head, unsigned int line)
 {
-    stack_t *newn = (*head);
-    stack_t *swapped = (*head);
-    (*head) = (*head)->next;
-    newn->n = (*head)->n;
-    (*head)->n = swapped->n;
+    int swap = (*head)->n;
+
+
 }
 void *add(stack_t **head, unsigned int line)
 {
@@ -56,5 +54,10 @@ void *add(stack_t **head, unsigned int line)
     {
         return("ERROR FILL IN ERROR CODES");
     }
+    int first = (*head)->n;
+    *head = (*head)->next;
+    int sum = first + (*head)->n;
+    return (sum);
 
 }
+
