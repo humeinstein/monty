@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	int line_count = 0;
 	FILE *file;
 
-	if (argc > 1)
+	if (argc > 1 && argc < 3)
 	{
 		file = fopen(argv[1], "r");
 		if ((file))
@@ -30,11 +30,13 @@ int main(int argc, char *argv[])
 			fclose(file);
 		}
 		else
-			printf("Error: %s; file not found\n", argv[1]);
+			printf("Error: Can't open file %s\n", argv[1]);
 	}
 	else
-
-		printf("Error: No input file detected\n");
+	{
+		printf("USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 	return (0);
 }
 
