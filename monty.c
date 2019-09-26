@@ -11,21 +11,30 @@ int main(int argc, char *argv[])
 {
 	char **file_input = NULL;
 	int line_count = 0;
+	FILE *file;
 
 	if (argc > 1)
 	{
+		file = fopen(argv[1], "r");
+		if ((file))
+		{
+			file_input = file_to_array(argv[1]);
 
-		file_input = file_to_array(argv[1]);
+			if (file_input != NULL)
+				for (line_count = 0; file_input[line_count] != NULL; line_count++)
+					line_parser(file_input[line_count], (unsigned int)line_count + 1);
 
-		for (line_count = 0; file_input[line_count] != NULL; line_count++)
-			line_parser(file_input[line_count]);
-
+			free_2d_array(file_input);
+			if (global_stack != NULL)
+				free_dlistint(global_stack);
+			fclose(file);
+		}
+		else
+			printf("Error: %s; file not found\n", argv[1]);
 	}
 	else
 
 		printf("Error: No input file detected\n");
-	free_2d_array(file_input);
-	free_dlistint(global_stack);
 	return (0);
 }
 
