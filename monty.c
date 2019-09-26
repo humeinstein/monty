@@ -23,8 +23,10 @@ int main(int argc, char *argv[])
 
 	}
 	else
-		printf("Error: No input file detected\n");
 
+		printf("Error: No input file detected\n");
+	free_2d_array(file_input);
+	free_dlistint(global_stack);
 	return (0);
 }
 
