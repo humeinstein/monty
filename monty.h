@@ -46,6 +46,8 @@ void *push(stack_t **head, unsigned int value, unsigned int line);
 void *pall(stack_t **head, unsigned int line);
 void *pint(stack_t **head, unsigned int line);
 void *swap(stack_t **head, unsigned int line);
+void *add(stack_t **head, unsigned int line);
+
 
 
 int monty(int argc, char **argv);
