@@ -36,26 +36,34 @@ void push(stack_t **head, unsigned int value, unsigned int line)
 		(*head)->prev = new;
 		new->n = (int)value;
 	}
-
-
 }
 
 void pall(stack_t **head, unsigned int line)
 {
 	(void)line;
 
-	while ((*head)->prev != NULL)
-		(*head) = (*head)->prev;
-
-	while ((*head)->next != NULL)
+	if ((*head)->next == NULL
+		&& (*head)->prev == NULL
+		&& (*head)->n > -1)
 	{
 		printf("%d\n", (*head)->n);
-		(*head) = (*head)->next;
 	}
+	else
+	{
+		if ((*head) != NULL && head != NULL)
+		{
+			while ((*head)->prev != NULL)
+				(*head) = (*head)->prev;
 
-		printf("%d\n", (*head)->n);
+			while ((*head)->next != NULL)
+			{
+				printf("%d\n", (*head)->n);
+				(*head) = (*head)->next;
+			}
 
-
+			printf("%d\n", (*head)->n);
+		}
+	}
 }
 void pint(stack_t **head, unsigned int line)
 {
