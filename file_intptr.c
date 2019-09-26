@@ -8,8 +8,8 @@
  */
 char **file_to_array(const char *file)
 {
-	char *file_out;
-	int file_desc, file_size;
+	char *file_out = NULL, **multi_file_out = NULL;
+	int file_desc = 0, file_size = 0;
 	struct stat st;
 
 	file_desc = open(file, O_RDONLY);
@@ -25,7 +25,10 @@ char **file_to_array(const char *file)
 		return (NULL);
 
 	read(file_desc, file_out, file_size - 1);
-	return (file_to_2d_array(file_out));
+
+	multi_file_out = file_to_2d_array(file_out);
+	free(file_out);
+	return (multi_file_out);
 
 }
 
@@ -43,7 +46,7 @@ char **file_to_2d_array(char *string_to_parse)
 
 	while (string_to_parse[loop] != '\0')
 	{
-		if (string_to_parse[loop] == ' ')
+		if (string_to_parse[loop] == '\n')
 			cmd_count++;
 		loop++;
 	}
@@ -66,7 +69,6 @@ char **file_to_2d_array(char *string_to_parse)
 	}
 
 	free(ptr_origin);
-	free(tok_cmd);
 
 	return (parsed_array);
 }
@@ -89,19 +91,20 @@ int sizeof_string(char *str)
 
 	return (size_counter);
 }
+
+
 /**
  * line_parser - parser a command line and calls the proper op code
  * @line: The line to parse and execute
  */
 void line_parser(char *line)
 {
-	char *command, *token, *ptr_origin;
+	char *command = NULL, *token = NULL;
 	int parameter = -1;
 
 	command = NULL;
 
 	token = strtok(line, " ");
-	ptr_origin = token;
 	while (token != NULL)
 	{
 		if ((token[0] > 96 && token[0] < 123) && command == NULL)
@@ -123,4 +126,40 @@ void line_parser(char *line)
 /*	if (strcmp(command, "pop") == 0)
 		pall(&global_stack, (unsigned int)1);
 */
+}
+
+/**
+ * free_2d_array - Used for simplified freeing of 2d arrays
+ * @arr: The pointer to free
+ */
+void free_2d_array(char **arr)
+{
+	int loop = 0;
+
+	loop = 0;
+	while (arr[loop] != NULL)
+	{
+		free(arr[loop]);
+		loop++;
+	}
+	free(arr);
+}
+
+/**
+ * free_dlistint - Frees a doubly linked list
+ * @head: the list to free
+ */
+void free_dlistint(stack_t *head)
+{
+	stack_t *temp = NULL;
+
+	while (head->prev != NULL)
+		head = head->prev;
+
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
 }
