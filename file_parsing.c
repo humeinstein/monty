@@ -1,6 +1,5 @@
 #include "monty.h"
 
-
 /**
  * line_parser - parser a command line and calls the proper op code
  * @line: The line to parse and execute
@@ -10,6 +9,7 @@ void line_parser(char *line, unsigned int line_num)
 {
 	char *command = NULL, *token = NULL;
 	int parameter = -1;
+	stack_t *global_stack;
 
 	command = NULL;
 
@@ -28,12 +28,17 @@ void line_parser(char *line, unsigned int line_num)
 
 	if (strcmp(command, "push") == 0)
 		push(&global_stack, (unsigned int)parameter, line_num);
-	if (strcmp(command, "pint") == 0)
+	else if (strcmp(command, "pint") == 0)
 		pint(&global_stack, line_num);
-	if (strcmp(command, "pall") == 0)
+	else if (strcmp(command, "pall") == 0)
 		pall(&global_stack, line_num);
-	if (strcmp(command, "pop") == 0)
+	else if (strcmp(command, "pop") == 0)
 		pall(&global_stack, line_num);
+	else
+	{
+		printf("L%d: unknown instruction %s\n", (int)line_num, command);
+		exit(EXIT_FAILURE);
+	}
 }
 
 
@@ -57,7 +62,10 @@ char **file_to_array(const char *file)
 	file_out = malloc(file_size);
 
 	if (!file_out)
-		return (NULL);
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	if (file_desc == -1)
 		return (NULL);
 
@@ -88,9 +96,18 @@ char **file_to_2d_array(char *string_to_parse)
 	}
 
 	parsed_array = malloc(cmd_count * sizeof(char *) + 1);
-
+	if (!parsed_array)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	loop = 0;
 	tok_cmd = malloc(sizeof_string(string_to_parse) * sizeof(char));
+	if (!tok_cmd)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	strcpy(tok_cmd, string_to_parse);
 	ptr_origin = tok_cmd;
 	tok_cmd = strtok(tok_cmd, "\n");

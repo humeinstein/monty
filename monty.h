@@ -48,8 +48,6 @@ void pint(stack_t **head, unsigned int line);
 void *swap(stack_t **head, unsigned int line);
 void *add(stack_t **head, unsigned int line);
 
-stack_t *global_stack;
-
 void free_2d_array(char **arr);
 int monty(int argc, char **argv);
 char **file_to_array(const char *file);
@@ -57,4 +55,5 @@ void line_parser(char *line, unsigned int line_num);
 int sizeof_string(char *);
 char **file_to_2d_array(char *string);
 void free_dlistint(stack_t *head);
+
 #endif
