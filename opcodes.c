@@ -6,21 +6,21 @@
 */
 void *pop(stack_t **head, unsigned int line)
 {
-    *temp = *head->next;
+    stack_t *temp = (*head)->next;
     free(*head);
-    *head = temp;
-    return(NULL)
+    (*head) = temp;
+    return(NULL);
 }
 void *push(stack_t **head, unsigned int value, unsigned int line)
 {
-    *new = *head;
+    stack_t *new = (*head);
     new->n = value;
-    new->next = *head;
+    new->next = (*head);
     new->prev = NULL;
 
     if ((*head) != NULL)
         (*head)->prev = new;
-    *head = new;
+    (*head) = new;
 }
 void *pall(stack_t **head, unsigned int line)
 {
@@ -29,20 +29,32 @@ void *pall(stack_t **head, unsigned int line)
 
     while (*head)
     {
-        inc++
-        printf("%d\n", *head->n);
-        *head = *head->next;
+        inc++;
+        printf("%d\n", (*head)->n);
+        (*head) = (*head)->next;
     }
     return(NULL);
 }
 void *pint(stack_t **head, unsigned int line)
 {
-    if (*head != NULL)
+    if ((*head) != NULL)
     {
-        printf("%d", *head->n);
+        printf("%d", (*head)->n);
     }
 }
-void *swap(stack_t **head, unsgined int line)
+void *swap(stack_t **head, unsigned int line)
 {
-    
+    stack_t *newn = (*head);
+    stack_t *swapped = (*head);
+    (*head) = (*head)->next;
+    newn->n = (*head)->n;
+    (*head)->n = swapped->n;
+}
+void *add(stack_t **head, unsigned int line)
+{
+    if ((*head) == NULL || (*head)->next == NULL)
+    {
+        return("ERROR FILL IN ERROR CODES");
+    }
+
 }
