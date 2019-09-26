@@ -4,6 +4,7 @@
 /**
  * line_parser - parser a command line and calls the proper op code
  * @line: The line to parse and execute
+ * @line_num: The number of the line being executed
  */
 void line_parser(char *line, unsigned int line_num)
 {
@@ -68,10 +69,10 @@ char **file_to_array(const char *file)
 }
 
 /**
- * cmd_parser - seperates each parameter into a slot in an array
- * @cmd_to_parse: The command for parse (for ex. "Ls - l")
+ * file_to_2d_array - seperates line into its own slot in the array
+ * @string_to_parse: The string to convert to 2d array
  *
- * Return: The 2d array for execution
+ * Return: The 2d array for interpretation
  */
 char **file_to_2d_array(char *string_to_parse)
 {
