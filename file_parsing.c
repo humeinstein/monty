@@ -37,6 +37,7 @@ void line_parser(char *line, unsigned int line_num)
 	else
 	{
 		printf("L%d: unknown instruction %s\n", (int)line_num, command);
+		free_dlistint(global_stack);
 		exit(EXIT_FAILURE);
 	}
 }

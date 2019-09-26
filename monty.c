@@ -25,8 +25,6 @@ int main(int argc, char *argv[])
 					line_parser(file_input[line_count], (unsigned int)line_count + 1);
 
 			free_2d_array(file_input);
-			if (global_stack != NULL)
-				free_dlistint(global_stack);
 			fclose(file);
 		}
 		else
