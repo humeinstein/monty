@@ -41,12 +41,9 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void pop(stack_t **head, unsigned int line);
-void push(stack_t **head, unsigned int value, unsigned int line);
+void push(stack_t **head, char *value, unsigned int line);
 void pall(stack_t **head, unsigned int line);
 void pint(stack_t **head, unsigned int line);
-void *swap(stack_t **head, unsigned int line);
-void *add(stack_t **head, unsigned int line);
 
 void free_2d_array(char **arr);
 int monty(int argc, char **argv);
