@@ -6,7 +6,7 @@
  */
 void free_2d_array(char **arr)
 {
-	int loop = -1;
+	int loop;
 
 	loop = 0;
 	while (arr[loop] != NULL)
@@ -23,7 +23,9 @@ void free_2d_array(char **arr)
  */
 void free_dlistint(stack_t *head)
 {
-	stack_t *temp = NULL;
+	stack_t *temp;
+
+	temp = NULL;
 
 	while (head->prev != NULL)
 		head = head->prev;
@@ -44,7 +46,7 @@ void free_dlistint(stack_t *head)
  */
 int sizeof_string(char *str)
 {
-	int size_counter = 0;
+	int size_counter;
 
 	size_counter = 0;
 	while (str[size_counter] != '\0')

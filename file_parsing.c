@@ -42,9 +42,14 @@ void line_parser(char *line, unsigned int line_num)
  */
 char **file_to_array(const char *file)
 {
-	char *file_out = NULL, **multi_file_out = NULL;
-	int file_desc = 0, file_size = 0;
+	char *file_out, **multi_file_out;
+	int file_desc, file_size;
 	struct stat st;
+
+	file_out = NULL;
+	multi_file_out = NULL;
+	file_desc = 0;
+	file_size = 0;
 
 	file_desc = open(file, O_RDONLY);
 
@@ -55,7 +60,7 @@ char **file_to_array(const char *file)
 
 	if (!file_out)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	if (file_desc == -1)
@@ -76,9 +81,16 @@ char **file_to_array(const char *file)
  */
 char **file_to_2d_array(char *string_to_parse)
 {
-	char **parsed_array = NULL;
-	char *tok_cmd = NULL, *ptr_origin = NULL;
-	int loop = 0, cmd_count = 1;
+	char **parsed_array;
+	char *tok_cmd, *ptr_origin;
+	int loop, cmd_count;
+
+	parsed_array = NULL;
+	tok_cmd = NULL;
+	ptr_origin = NULL;
+
+	loop = 0;
+	cmd_count = 1;
 
 	while (string_to_parse[loop] != '\0')
 	{
@@ -90,14 +102,14 @@ char **file_to_2d_array(char *string_to_parse)
 	parsed_array = malloc(cmd_count * sizeof(char *) + 1);
 	if (!parsed_array)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	loop = 0;
 	tok_cmd = malloc(sizeof_string(string_to_parse) * sizeof(char));
 	if (!tok_cmd)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	strcpy(tok_cmd, string_to_parse);

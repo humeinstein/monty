@@ -8,7 +8,9 @@
  */
 void push(stack_t **head, char *value, unsigned int line)
 {
-    	stack_t *new = NULL;
+    	stack_t *new;
+
+	new = NULL
 
 	if ((atoi(value) == 0 && value[0] != 0) || value == NULL)
 	{

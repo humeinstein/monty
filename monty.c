@@ -9,9 +9,11 @@
  */
 int main(int argc, char *argv[])
 {
-	char **file_input = NULL;
+	char **file_input;
 	int line_count = 0;
 	FILE *file;
+
+	file_input = NULL;
 
 	if (argc > 1 && argc < 3)
 	{
@@ -28,11 +30,11 @@ int main(int argc, char *argv[])
 			fclose(file);
 		}
 		else
-			printf("Error: Can't open file %s\n", argv[1]);
+			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 	}
 	else
 	{
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	return (0);
