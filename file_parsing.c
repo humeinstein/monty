@@ -10,16 +10,13 @@ stack_t *global_stack;
 void line_parser(char *line, unsigned int line_num)
 {
 	char *command, *token, *param;
-
 	command = NULL;
 
 	token = strtok(line, " ");
 	while (token != NULL)
 	{
 		if ((token[0] >= 'a' && token[0] <= 'z') && command == NULL)
-		{
 			command = token;
-		}
 		else if (atoi(token) != 0 && token[0] != '0')
 			param = token;
 
@@ -28,9 +25,12 @@ void line_parser(char *line, unsigned int line_num)
 
 
 	if (strcmp(command, "push") == 0)
-	{
 		push(&global_stack, param, line_num);
-	}
+	else if (strcmp(command, "pall") == 0)
+		pall(&global_stack, line_num);
+	else if (strcmp(command, "pint") == 0)
+		pint(&global_stack, line_num);
+
 }
 
 
