@@ -1,29 +1,30 @@
 #include "monty.h"
 
 /**
-* pop - function that pops node
-*
-*
-*/
-
-/*
-void pop(stack_t **head, unsigned int line)
-{
-}
-*/
-void push(stack_t **head, unsigned int value, unsigned int line)
+ * push - adds a new node to the stack, or creates one if none exists
+ * @head: The global stacked
+ * @value: The value of the new node
+ * @line: The line in the monty file the command was executed on
+ */
+void push(stack_t **head, char *value, unsigned int line)
 {
     	stack_t *new = NULL;
-	new = malloc(sizeof(stack_t));
 
-	if ((int)value != -1)
-    		new->n = (int)value;
-	else
+	if ((atoi(value) == 0 && value[0] != 0) || value == NULL)
 	{
-		printf("L%d: usage: push integer\n", line);
+		fprintf(stderr, "L%d: usage: push integer\n", line);
 		exit(EXIT_FAILURE);
 	}
 
+	new = malloc(sizeof(stack_t));
+
+	if (!new)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+
+	new->n = atoi(value);
 
 	if (*head == NULL)
 		(*head) = new;
@@ -31,67 +32,76 @@ void push(stack_t **head, unsigned int value, unsigned int line)
 	{
 		while ((*head)->prev != NULL)
 			(*head) = (*head)->prev;
+
 		new->next = (*head);
-		new->prev = NULL;
 		(*head)->prev = new;
-		new->n = (int)value;
+		new->n = atoi(value);
 	}
 }
 
+/**
+ * pall - Prints all elements of the stack
+ * @head: The stack to print
+ * @line: The line the command was called on
+ */
 void pall(stack_t **head, unsigned int line)
 {
 	(void)line;
 
-	if ((*head)->next == NULL
-		&& (*head)->prev == NULL
-		&& (*head)->n > -1)
+	if ((*head) != NULL)
 	{
-		printf("%d\n", (*head)->n);
-	}
-	else
-	{
-		if ((*head) != NULL && head != NULL)
-		{
-			while ((*head)->prev != NULL)
-				(*head) = (*head)->prev;
+		while ((*head)->prev != NULL)
+			(*head) = (*head)->prev;
 
-			while ((*head)->next != NULL)
-			{
-				if ((*head)->n > -1)
-					printf("%d\n", (*head)->n);
-				(*head) = (*head)->next;
-			}
-			if ((*head)->n > -1)
-				printf("%d\n", (*head)->n);
+		printf("%d\n", (*head)->n);
+		while ((*head)->next != NULL)
+		{
+			(*head) = (*head)->next;
+			printf("%d\n", (*head)->n);
 		}
 	}
 }
+
+/**
+ * pint - prints the value at the top of the stack
+ * @head: The stack
+ * @line: the line pint was called on
+ */
 void pint(stack_t **head, unsigned int line)
 {
-	stack_t *temp;
-	temp = *head;
-	(void)line;
-
-	if (*head != NULL)
+	if ((*head) == NULL)
 	{
-		while (temp->prev != NULL)
-			temp = temp->prev;
-
-		printf("%d\n", temp->n);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line);
+		exit(EXIT_FAILURE);
 	}
-	else
-		printf("No stack found\n");
+		while ((*head)->prev != NULL)
+			(*head) = (*head)->prev;
+
+		printf("%d\n", (*head)->n);
 
 }
-/*
-void *swap(stack_t **head, unsigned int line)
+
+void pop(stack_t **head, unsigned int line)
 {
-    int swap = (*head)->n;
+	stack_t temp;
 
+	if ((*head) == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line);
+		exit(EXIT_FAILURE);
+	}
+
+	while ((*head)->prev != NULL)
+		(*head) = (*head)->prev;
+
+	temp = (*head);
+	(*head)->next = NULL;
+	(*head) = (*head)->next;
+	(*head)->prev = NULL;
+
+	free(temp);
 
 }
-*/
-
 /*
 void *add(stack_t **head, unsigned int line)
 {
