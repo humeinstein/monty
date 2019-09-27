@@ -1,5 +1,7 @@
 #include "monty.h"
 
+
+stack_t *global_stack;
 /**
  * line_parser - parser a command line and calls the proper op code
  * @line: The line to parse and execute
@@ -7,38 +9,27 @@
  */
 void line_parser(char *line, unsigned int line_num)
 {
-	char *command = NULL, *token = NULL;
-	int parameter = -1;
-	stack_t *global_stack;
+	char *command, *token, *param;
 
 	command = NULL;
 
 	token = strtok(line, " ");
 	while (token != NULL)
 	{
-		if ((token[0] > 96 && token[0] < 123) && command == NULL)
-			command = token;
-		else if (token[0] > 47 && token[0] < 58)
+		if ((token[0] >= 'a' && token[0] <= 'z') && command == NULL)
 		{
-			parameter = atoi(token);
-			break;
+			command = token;
 		}
+		else if (atoi(token) != 0 && token[0] != '0')
+			param = token;
+
 		token = strtok(NULL, " ");
 	}
 
+
 	if (strcmp(command, "push") == 0)
-		push(&global_stack, (unsigned int)parameter, line_num);
-	else if (strcmp(command, "pint") == 0)
-		pint(&global_stack, line_num);
-	else if (strcmp(command, "pall") == 0)
-		pall(&global_stack, line_num);
-	else if (strcmp(command, "pop") == 0)
-		pall(&global_stack, line_num);
-	else
 	{
-		printf("L%d: unknown instruction %s\n", (int)line_num, command);
-		free_dlistint(global_stack);
-		exit(EXIT_FAILURE);
+		push(&global_stack, param, line_num);
 	}
 }
 
