@@ -5,8 +5,13 @@
 * @line: line command is being called from file
 * 
 */
-void nope(stack_t **head, unsigned int line)
+void nop(stack_t **head, unsigned int line)
 {
     *head = *head;
     line = line;
 }
+/**
+*
+*
+*
+*/
