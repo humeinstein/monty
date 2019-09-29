@@ -12,15 +12,4 @@
 
 ![](https://img.shields.io/badge/release-V%3A1.01-orange) ![](https://img.shields.io/badge/holberton%20approved-pending-yellow)
 
-
-###FlowChart
-```flow
-st=>start: ./file file.m
-op=>operation: Contains Monty bytecode
-cond=>condition: Successful Yes: Run Code
-e=>end: print to STDOUT
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
+<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://www.lucidchart.com/documents/embeddedchart/38bef184-787c-44cb-88ec-cb337883ddc1" id="Y_oWRWYykzLD"></iframe></div>
