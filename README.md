@@ -3,7 +3,7 @@
 - Interpret Monty .98 bytecode files (.m)
 - Compatible with Ubuntu 16.04 LTS
 - Support identification, interpretation, execution of monty bytecode files (.m)
-#### Contributors:
+####Contributors:
 			Carter Clements: github.com/javaPhish
 			Andrew Graf: github.com/humeinstein
 #Monty Interpreter
