@@ -13,9 +13,9 @@ void nop(stack_t **head, unsigned int line)
     line = line;
 }
 /**
-*
-*
-*
+* sub - subtracts top element from 2nd top element of the stack
+* @head: ptr to dbl
+* @line: line that command is sent from
 */
 void sub(stack_t **head, unsigned int line)
 {
