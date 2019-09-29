@@ -10,9 +10,11 @@
 int main(int argc, char *argv[])
 {
 	char **file_input;
-	int line_count = 0;
+	int line_count;
 	FILE *file;
 
+	line_count = 0;
+	file = NULL;
 	file_input = NULL;
 
 	if (argc > 1 && argc < 3)
@@ -24,8 +26,9 @@ int main(int argc, char *argv[])
 
 			if (file_input != NULL)
 				for (line_count = 0; file_input[line_count] != NULL; line_count++)
-					line_parser(file_input[line_count], (unsigned int)line_count + 1);
+					line_parser(file_input[line_count], (unsigned int)line_count);
 
+			free_stack();
 			free_2d_array(file_input);
 			fclose(file);
 		}
@@ -37,6 +40,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+
+
+
 	return (0);
 }
 

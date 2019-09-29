@@ -10,7 +10,7 @@ void push(stack_t **head, char *value, unsigned int line)
 {
     	stack_t *new;
 
-	new = NULL
+	new = NULL;
 
 	if ((atoi(value) == 0 && value[0] != 0) || value == NULL)
 	{
@@ -29,7 +29,11 @@ void push(stack_t **head, char *value, unsigned int line)
 	new->n = atoi(value);
 
 	if (*head == NULL)
+	{
 		(*head) = new;
+		new->next = NULL;
+		new->prev = NULL;
+	}
 	else
 	{
 		while ((*head)->prev != NULL)
@@ -52,15 +56,17 @@ void pall(stack_t **head, unsigned int line)
 
 	if ((*head) != NULL)
 	{
+
 		while ((*head)->prev != NULL)
 			(*head) = (*head)->prev;
 
-		printf("%d\n", (*head)->n);
 		while ((*head)->next != NULL)
 		{
-			(*head) = (*head)->next;
 			printf("%d\n", (*head)->n);
+			(*head) = (*head)->next;
+
 		}
+		printf("%d\n", (*head)->n);
 	}
 }
 
@@ -76,16 +82,20 @@ void pint(stack_t **head, unsigned int line)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line);
 		exit(EXIT_FAILURE);
 	}
-		while ((*head)->prev != NULL)
-			(*head) = (*head)->prev;
+	while ((*head)->prev != NULL)
+		(*head) = (*head)->prev;
 
-		printf("%d\n", (*head)->n);
+	printf("%d\n", (*head)->n);
 
 }
 
+/**
+ * pop - removes the top element of the stack
+ * @head: The stack to remove from
+ * @line: The line "pop" was called from
+ */
 void pop(stack_t **head, unsigned int line)
 {
-	stack_t temp;
 
 	if ((*head) == NULL)
 	{
@@ -96,25 +106,9 @@ void pop(stack_t **head, unsigned int line)
 	while ((*head)->prev != NULL)
 		(*head) = (*head)->prev;
 
-	temp = (*head);
-	(*head)->next = NULL;
 	(*head) = (*head)->next;
+	free((*head)->prev);
 	(*head)->prev = NULL;
 
-	free(temp);
-
 }
-/*
-void *add(stack_t **head, unsigned int line)
-{
 
-    if ((*head) == NULL || (*head)->next == NULL)
-    {
-        return("ERROR FILL IN ERROR CODES");
-    }
-    int first = (*head)->n;
-    *head = (*head)->next;
-    int sum = first + (*head)->n;
-
-}
-*/
