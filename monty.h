@@ -55,5 +55,5 @@ int sizeof_string(char *);
 char **file_to_2d_array(char *string);
 void free_dlistint(stack_t *head);
 void nop(stack_t **head, unsigned int line);
-
+void sub(stack_t **head, unsigned int line);
 #endif

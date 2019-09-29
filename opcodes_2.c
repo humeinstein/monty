@@ -1,4 +1,6 @@
 #include "monty.h"
+
+stack_t *global_stack;
 /**
 * nope - function that does nothing
 * @head: pointer to head
@@ -15,3 +17,16 @@ void nop(stack_t **head, unsigned int line)
 *
 *
 */
+void sub(stack_t **head, unsigned int line)
+{
+    if ((*head) != NULL)
+    {
+        int x = 0;
+        while ((*head)->prev != NULL)
+            (*head) = (*head)->prev;
+        x = (*head)->n;
+        pop(&global_stack, line);
+        (*head)->n -= x;
+        printf("%d", (*head)->n);
+    }
+}

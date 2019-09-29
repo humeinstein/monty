@@ -36,6 +36,8 @@ void line_parser(char *line, unsigned int line_num)
 		pop(&global_stack, line_num);
 	else if (strcmp(command, "nop") == 0)
 		nop(&global_stack, line_num);
+	else if (strcmp(command, "sub") == 0)
+		sub(&global_stack, line_num);
 
 }
 
